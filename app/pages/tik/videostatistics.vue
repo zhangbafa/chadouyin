@@ -3,6 +3,15 @@ import { reactive, ref } from 'vue'
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+// 为页面添加 SEO 相关的元数据
+useSeoMeta({
+  title: '单个作品播放数据查询 - liveHub',
+  description: '输入一个或多个作品ID，快速查询并分析视频的播放量、点赞、评论等关键数据统计。',
+  ogTitle: '单个作品播放数据查询 - liveHub',
+  ogDescription: '输入一个或多个作品ID，快速查询并分析视频的播放量、点赞、评论等关键数据统计。',
+  twitterCard: 'summary_large_image',
+})
+
 
 // Define the validation schema using Zod
 const schema = z.object({

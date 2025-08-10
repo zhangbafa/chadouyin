@@ -52,7 +52,7 @@ const links = [
         </NuxtLink>
       </div>
       
-      <footer class="text-center mt-12 text-gray-500">
+      <footer class="text-center mt-12 text-gray-500 text-xs">
         <p>LiveHub &copy; 2025</p>
       </footer>
     </div>
