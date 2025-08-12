@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
       }
     });
 
-    console.log('Received data from external API:', JSON.stringify(externalData));
+    // console.log('Received data from external API:', JSON.stringify(externalData));
 
     // 3. 处理并返回最终结果
     // 假设外部API返回的数据结构是 { data: { views: ..., likes: ... } }

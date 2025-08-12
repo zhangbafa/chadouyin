@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UButton, ULink } from '#components'
+
 const links = [
   {
     title: 'GitHub',
@@ -19,28 +21,43 @@ const links = [
     icon: 'i-heroicons-fire'
   }
 ]
+
+definePageMeta({
+  // middleware: ['authenticated']
+})
+
+const { user, clear: clearSession, loggedIn } = useUserSession()
+
+async function logout() {
+  await clearSession()
+  await navigateTo('/login')
+}
+
+function login(){
+  navigateTo('/login')
+}
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <div class="container mx-auto px-4 py-8 sm:py-12">
-      <!-- <header class="text-center mb-8 sm:mb-12">
-        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">链接中心</h1>
-        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">一些精选的常用链接和资源</p>
-      </header> -->
+      <header class="text-center mb-8 sm:mb-12">
+        <!-- <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">链接中心</h1>
+        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">一些精选的常用链接和资源</p> -->
+        <div v-if="loggedIn">          
+          <ULink style="margin-right: 20px;">欢迎,{{ user || 'zhang' }}</ULink>
+          <UButton @click="logout">注销</UButton>    
+        </div>
+        <div v-else>          
+          <UButton @click="login">登录</UButton>    
+        </div>
+      </header>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        <NuxtLink
-          v-for="link in links"
-          :key="link.url"
-          :to="link.url"
-         
-          class="block"
-        >
+        <NuxtLink v-for="link in links" :key="link.url" :to="link.url" class="block">
           <UCard
             class="h-full transition-all duration-300 ease-in-out hover:transform hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-gray-800/50"
-            :ui="{ ring: 'dark:ring-gray-700', background: 'dark:bg-gray-800' }"
-          >
+            :ui="{ ring: 'dark:ring-gray-700', background: 'dark:bg-gray-800' }">
             <div class="flex items-start space-x-4">
               <!-- <UIcon :name="link.icon" class="text-3xl flex-shrink-0 text-gray-700 dark:text-gray-300 mt-1" /> -->
               <div>
@@ -51,7 +68,7 @@ const links = [
           </UCard>
         </NuxtLink>
       </div>
-      
+
       <footer class="text-center mt-12 text-gray-500 text-xs">
         <p>LiveHub &copy; 2025</p>
       </footer>
