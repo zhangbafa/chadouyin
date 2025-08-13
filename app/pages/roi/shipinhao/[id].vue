@@ -59,76 +59,83 @@
             </div>
         </UForm>
         <div class="mt-10">
-            <h2 class="text-xl font-semibold text-primary flex items-center justify-start mb-4">
+            <h2 class="text-xl font-semibold flex items-center justify-start mb-4">
                 <UIcon name="i-heroicons-chevron-down" class="mr-2" />
                 计算结果
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">毛利佣金</p>
-                    <p class="text-2xl font-bold text-orange-500">{{ result.estimatedCommission.toFixed(2) }}<span
-                            class="text-sm font-normal ml-1">元</span></p>
+                    <p class="text-2xl font-bold text-orange-500 mt-3 show-number">{{
+                        result.estimatedCommission.toFixed(2)
+                    }}<span class="text-sm font-normal ml-1">元</span></p>
                 </UCard>
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">纯利佣金</p>
-                    <p class="text-2xl font-bold text-orange-500">{{ result.estimatedSettlement.toFixed(2) }}<span
-                            class="text-sm font-normal ml-1">元</span></p>
+                    <p class="text-2xl font-bold text-orange-500 mt-3 show-number">{{
+                        result.estimatedSettlement.toFixed(2)
+                    }}<span class="text-sm font-normal ml-1">元</span></p>
                 </UCard>
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">预估ROI</p>
-                    <p class="text-2xl font-bold text-orange-500">{{ result.estimatedBreakEvenROI.toFixed(2) }}</p>
+                    <p class="text-2xl font-bold text-orange-500 mt-3 show-number">{{
+                        result.estimatedBreakEvenROI.toFixed(2) }}
+                    </p>
                 </UCard>
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">保本ROI</p>
-                    <p class="text-2xl font-bold text-orange-500">
+                    <p class="text-2xl font-bold text-orange-500 mt-3 show-number">
                         {{ result.estimatedSettlementBreakEvenROI.toFixed(2) }}</p>
                 </UCard>
 
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <UCard>
-                    <div class="result-roi p-4">
-                        <p class="text-lg font-semibold text-primary mb-4">微信豆ROI出价</p>
-                        <!-- 检查数组是否有数据，没有则显示提示 -->
-                        <div v-if="result.roiArr.length === 0" class="text-gray-500">
-                            -
-                        </div>
-                        <div class="space-y-2" v-else>
-                            <div class="flex justify-between" v-for="(price, index) in result.roiArr"
-                                :key="'roi-' + index">
-                                <span>ROI*{{ (0.5 + index * 0.1).toFixed(1) }}倍：</span>
-                                <!-- roiArr是字符串数组，不需要再调用toFixed -->
-                                <span class="font-semibold text-orange-500">{{ price || '-' }}</span>
-                            </div>
+                <UCard :ui="{ body: 'p-0 sm:p-6' }">
+                    <template #header>
+                        <p class="text-lg font-semibold">微信豆ROI出价</p>
+                    </template>
+                    <div>
+                        <div class="flex justify-between border-b border-gray-200 p-4"
+                            v-for="(price, index) in result.roiArr" :key="'roi-' + index">
+                            <span>ROI*{{ (0.5 + index * 0.1).toFixed(1) }}倍：</span>
+                            <!-- roiArr是字符串数组，不需要再调用toFixed -->
+                            <span class="font-semibold text-orange-500 show-number text-xl">{{ price || '0' }}</span>
                         </div>
                     </div>
-                    <div class="mt-10 pl-4">
-                        建议目标ROI出价:{{ result.roijia.toFixed(2) }}
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mt-4 mb-4 text-center">
+                    <div class="text-center">
+                        <p class="text-base font-normal ">建议目标ROI出价</p>
+                        <p class="mt-2 text-4xl font-bold tracking-tight show-number text-orange-500">{{
+                            result.roijia.toFixed(2) }}</p>
                     </div>
+                </div>
                 </UCard>
-                <UCard>
-                    <div class="result-roi p-4">
-                        <p class="text-lg font-semibold text-primary mb-4">微信豆手动出价</p>
-                        <!-- 检查数组是否有数据，没有则显示提示 -->
-                        <div v-if="result.chujiaArr.length === 0" class="text-gray-500">
-                            -
-                        </div>
-                        <div class="space-y-2" v-else>
-                            <div class="flex justify-between" v-for="(price, index) in result.chujiaArr"
-                                :key="'chujia-' + index">
-                                <span>{{ (0.8 + index * 0.1).toFixed(1) }}倍出豆：</span>
-                                <span class="font-semibold text-orange-500">{{ Math.round(Number(price)) || '-' }}
-                                </span>
-                            </div>
+               
+                <UCard :ui="{ body: 'p-0 sm:p-6' }">
+                    <template #header>
+                        <p class="text-lg font-semibold">微信豆手动出价</p>
+                    </template>
+                    <div>
+                        <div class="flex justify-between border-b border-gray-200 p-4"
+                            v-for="(price, index) in result.chujiaArr" :key="'chujia-' + index">
+                            <span>{{ (0.8 + index * 0.1).toFixed(1) }}倍出豆：</span>
+                            <span class="font-semibold text-orange-500 show-number text-xl">{{ Math.round(Number(price))
+                                || '0'
+                                }}
+                            </span>
                         </div>
                     </div>
-                    <div class="mt-10 pl-4">
-                        建议启动微信豆出价:{{ Math.round(result.jianyijia) }}
+                    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mt-4 mb-4 text-center">
+                        <div class="text-center">
+                            <p class="text-base font-normal ">建议启动微信豆出价</p>
+                            <p class="mt-2 text-4xl font-bold tracking-tight show-number text-orange-500">
+                                {{ Math.round(result.jianyijia) }}</p>
+                        </div>
                     </div>
                 </UCard>
             </div>
 
-            <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+            <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
                 <p><b> 注：投放出价按纯佣金去除退款率计算而得。</b></p>
             </div>
 
@@ -140,7 +147,10 @@
 import { ref, reactive } from 'vue'
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-
+definePageMeta({
+    layout:'roi',
+    middleware: 'validate-roi-link'
+})
 // 定义结果类型接口
 interface CalculationResult {
     estimatedCommission: number;
@@ -176,8 +186,8 @@ const result = ref<CalculationResult>({
     estimatedSettlement: 0,
     estimatedBreakEvenROI: 0,
     estimatedSettlementBreakEvenROI: 0,
-    chujiaArr: [],
-    roiArr: [],
+    chujiaArr: Array(8).fill(0),
+    roiArr: Array(8).fill(0),
     roijia: 0,
     jianyijia: 0,
 })

@@ -10,6 +10,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     // The private keys which are only available server-side
     tikhub: process.env.TIKHUB,
+    supabaseUrl: process.env.SUPABASE_URL,
+    supabaseKey: process.env.SUPABASE_KEY,
   },
   auth:{
     hash:{
@@ -18,4 +20,5 @@ export default defineNuxtConfig({
       }
     }
   }
+  
 })

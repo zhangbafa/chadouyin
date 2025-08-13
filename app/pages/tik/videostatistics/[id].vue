@@ -3,6 +3,9 @@ import { reactive, ref } from 'vue'
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 
+definePageMeta({
+    middleware:['validate-tik-link']
+})
 // 为页面添加 SEO 相关的元数据
 useSeoMeta({
   title: '单个作品播放数据查询 - liveHub',

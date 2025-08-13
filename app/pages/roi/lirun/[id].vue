@@ -71,24 +71,24 @@
             </div>
         </UForm>
         <div class="mt-10">
-            <h2 class="text-xl font-semibold text-primary flex items-center justify-start mb-4">
+            <h2 class="text-xl font-semibold flex items-center justify-start mb-4">
                 <UIcon name="i-heroicons-chevron-down" class="mr-2" />
                 计算结果
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">预估利润</p>
-                    <p class="text-2xl font-bold text-orange-500">{{ estimatedSettlement.toFixed(2) }}<span
+                    <p class="text-3xl font-bold text-orange-500 mt-3 show-number">{{ estimatedSettlement.toFixed(2) }}<span
                             class="text-sm font-normal ml-1">元</span></p>
                 </UCard>
                 <UCard>
                     <p class="text-sm text-gray-500 dark:text-gray-400">结算利润</p>
-                    <p class="text-2xl font-bold text-orange-500">{{ estimatedBreakEvenROI.toFixed(2) }}<span
+                    <p class="text-3xl font-bold text-orange-500 mt-3 show-number">{{ estimatedBreakEvenROI.toFixed(2) }}<span
                             class="text-sm font-normal ml-1">元</span></p>
                 </UCard>
 
             </div>
-            <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+            <div class="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
                 <p><b> 注：商家在ROI商家版计算佣金率，商家平台费按实际填写(如：5%)。</b></p>
             </div>
 
@@ -100,6 +100,10 @@
 import { ref } from 'vue'
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+definePageMeta({
+    layout:'roi',
+    middleware: 'validate-roi-link'
+})
 const schema = z.object({
     price: z.number('必须输入大于0的数字').positive('必须输入大于0的数字'),
     commissionRate: z.number('必须输入大于0的数字'),
