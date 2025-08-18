@@ -1,9 +1,9 @@
 <template>
     <div class="container mx-auto p-4">
-        <!-- <div class="text-center my-5">
-            <h1 class="text-3xl font-bold text-primary">投放利润计算器</h1>
-            <p class="text-gray-500 dark:text-gray-400 mt-2">专业计算电商投放最佳出价策略</p>
-        </div> -->
+        <div class="text-center my-5">
+            <!-- <h1 class="text-3xl font-bold text-primary">投放利润计算器</h1>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">专业计算电商投放最佳出价策略</p> -->
+        </div>
         <UForm :schema="schema" :state="formState" class="space-y-4" @submit="handleSubmit">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-10">
                 <UFormField label="广告消耗" name="price">
