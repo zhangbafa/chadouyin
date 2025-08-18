@@ -1,9 +1,9 @@
 <template>
     <div class="container mx-auto p-4">
-        <div class="text-center my-5">
+        <!-- <div class="text-center my-5">
             <h1 class="text-3xl font-bold text-primary">ROI出价计算器达人版</h1>
             <p class="text-gray-500 dark:text-gray-400 mt-2">专业计算电商投放最佳出价策略</p>
-        </div>
+        </div> -->
 
         <UForm :schema="schema" :state="formState" class="space-y-4" @submit="handleSubmit">
             <div class="grid grid-cols-2 md:grid-cols-2 gap-10">
