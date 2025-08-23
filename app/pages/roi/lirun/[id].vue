@@ -64,7 +64,11 @@
                 </UFormField>
             </div>
 
+<<<<<<< HEAD
             <UButton type="submit" color="primary" block size="xl" :loading="loading">计算结果</UButton>
+=======
+            <UButton type="submit" color="primary" block size="xl">计算结果</UButton>
+>>>>>>> 4cfc3dd437120d342a140997b63beb890f992cff
 
             <div class="text-center text-sm text-gray-500 dark:text-gray-400" v-if="calculateTime">
                 {{ calculateTime }}
@@ -102,7 +106,7 @@ import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
 definePageMeta({
     layout:'roi',
-    // middleware: 'validate-roi-link'
+    middleware: 'validate-roi-link'
 })
 const schema = z.object({
     price: z.number('必须输入大于0的数字').positive('必须输入大于0的数字'),

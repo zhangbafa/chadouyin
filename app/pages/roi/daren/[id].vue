@@ -146,7 +146,7 @@ import type { card } from '#build/ui';
 
 definePageMeta({
     layout: 'roi',
-    // middleware: 'validate-roi-link'
+    middleware: 'validate-roi-link'
 })
 
 const schema = z.object({
