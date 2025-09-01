@@ -1,7 +1,26 @@
 <script setup lang="ts">
 import { UButton, ULink } from '#components'
 
-const links = [ ]
+const links = [
+  {
+    title: 'GitHub',
+    description: '查询抖音作品播放量（单个版本）',
+    url: 'tik/videostatistics',
+    icon: 'i-simple-icons-github'
+  },
+  {
+    title: 'V2EX',
+    description: '查询抖音作品播放量（单个版本）',
+    url: 'https://v2ex.com',
+    icon: 'i-heroicons-chat-bubble-left-right'
+  },
+  {
+    title: '稀土掘金',
+    description: '增加抖音视频播放量',
+    url: 'https://juejin.cn',
+    icon: 'i-heroicons-fire'
+  }
+]
 
 definePageMeta({
   // middleware: ['authenticated']
@@ -22,7 +41,17 @@ function login(){
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
     <div class="container mx-auto px-4 py-8 sm:py-12">
-      
+      <header class="text-center mb-8 sm:mb-12">
+        <!-- <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">链接中心</h1>
+        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">一些精选的常用链接和资源</p> -->
+        <div v-if="loggedIn">          
+          <ULink style="margin-right: 20px;">欢迎,{{ user || 'zhang' }}</ULink>
+          <UButton @click="logout">注销</UButton>    
+        </div>
+        <div v-else>          
+          <UButton @click="login">登录</UButton>    
+        </div>
+      </header>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         <NuxtLink v-for="link in links" :key="link.url" :to="link.url" class="block">
